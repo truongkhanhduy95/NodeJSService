@@ -6,18 +6,18 @@ exports.userInfo = (req, res) => {
     console.log(id);
     User.findById(id, function (err, user) {
         if (err)
-            res.status(404).send(err.errors);
+            res.json({ success: false, message: err });
         else
-            res.json(user);
+            res.json({ success: true, message: "Success!", data: user });
     });
 }
 
 exports.listUser = (req, res) => {
     User.find({}, function (err, listUser) {
         if (err)
-            res.status(422).send(err.errors);
+            res.json({ success: false, message: err });
         else
-            res.json(listUser);
+            res.json({ success: true, message: "Success!", data: listUser });
     });
 }
 
@@ -34,10 +34,10 @@ exports.registerUser = (req, res) => {
     user.gender = req.body.gender;
     user.save(function(err) {
         if (err) {
-            res.status(404).send(err.errors);
+            res.json({ success: false, message: err });
         }
         else {
-            res.json(user);
+            res.json({ success: true, message: "Save success!", data: user });
         }
     });
 } 
@@ -54,7 +54,7 @@ exports.authenticate = (req,res) => {
         } else if (user) {
           // check if password matches
           if (PasswordEncoder.comparePassword(req.body.password, user.password)) {
-            res.json(user);
+            res.json({ success: true, message: 'Authentication success.', data: user});
           } else {
             res.json({ success: false, message: 'Authentication failed. Wrong password.' });
           }
