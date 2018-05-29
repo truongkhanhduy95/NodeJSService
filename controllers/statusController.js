@@ -10,13 +10,13 @@ exports.list = (req, res) => {
 } 
 
 exports.post = (req, res) => {
-    const data = Object.assign({}, req.body, {}) || {};
-    
-    Status.create(data, function(err, statuses) {
-        if(err){
+    const data = Object.assign({}, req.body, {
+        //iMplement
+    }) || {};
+
+    Status.find(data, function(err, statuses) {
+        if(err)
             res.status(500).send(err.errors);
-            console.log(err.errors);
-        }
         else
             res.json(statuses); //json form success, 200?
     });

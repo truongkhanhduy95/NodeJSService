@@ -6,6 +6,9 @@ var Contact = require('../controllers/contactController')
 
 var apiRoutes = express.Router();
   
+apiRoutes.route('/status').get(Status.list);
+apiRoutes.route('/status').post(Status.post);
+apiRoutes.route('/login').post(User.authenticate);
 apiRoutes.route('/statuses').get(Status.list);
 apiRoutes.route('/statuses').post(Status.post);
 apiRoutes.route('/users').get(User.listUser);
