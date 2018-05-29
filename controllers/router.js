@@ -1,15 +1,9 @@
 var express = require('express');
-var User = require('../models/user')
+var Status = require('../controllers/statusController');
+
 var apiRoutes = express.Router();
-
-apiRoutes.get('/', function(req, res) {
-    res.json({ message: 'Welcome to the Zalo APIs!' });
-  });
   
-  apiRoutes.get('/users', function(req, res) {
-    User.find({}, function(err, user) {
-      res.json(user);
-    });
-  });   
+apiRoutes.route('/status').get(Status.list);
+apiRoutes.route('/status').post(Status.post);
 
-  module.exports = apiRoutes;
+module.exports = apiRoutes;
