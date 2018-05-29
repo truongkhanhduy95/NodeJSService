@@ -34,11 +34,9 @@ exports.registerUser = (req, res) => {
     user.gender = req.body.gender;
     user.save(function(err) {
         if (err) {
-            console.log(err)
             res.status(404).send(err.errors);
         }
         else {
-            console.log("success")
             res.json(user);
         }
     });
