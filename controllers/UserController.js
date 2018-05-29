@@ -42,3 +42,28 @@ exports.registerUser = (req, res) => {
         }
     });
 } 
+
+exports.authenticate = (req,res) => {
+    User.findOne({
+        username: req.body.username
+      }, function(err, user) {
+    
+        if (err) throw err;
+    
+        if (!user) {
+          res.json({ success: false, message: 'Authentication failed. User not found.' });
+        } else if (user) {
+    
+          // check if password matches
+          if (user.password != req.body.password) {
+            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          } else {
+
+            res.json({
+              success: true,
+              message: 'login success'
+            });
+          }
+        }
+    });
+}
