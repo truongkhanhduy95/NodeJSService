@@ -56,10 +56,7 @@ exports.authenticate = (req,res) => {
         } else if (user) {
           // check if password matches
           if (PasswordEncoder.comparePassword(req.body.password, user.password)) {
-            res.json({
-                success: true,
-                message: 'login success'
-              });
+            res.json(user);
           } else {
             res.json({ success: false, message: 'Authentication failed. Wrong password.' });
           }
