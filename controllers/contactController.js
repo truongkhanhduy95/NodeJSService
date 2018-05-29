@@ -3,8 +3,8 @@ var Contact = require('../models/contact');
 exports.list = (req, res) => {
     Contact.find({}, function(err, contacts) {
         if(err)
-            res.status(422).send(err.errors);
+            res.json({ success: false, message: err});
         else
-            res.json(contacts);
+            res.json({ success: true, message: "Success!", data: contacts });
     });
 }

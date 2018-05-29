@@ -1,6 +1,6 @@
 var express = require('express');
-var Status = require('../controllers/statusController');
 
+var Status = require('../controllers/statusController');
 var User = require('../controllers/UserController');
 var Contact = require('../controllers/contactController')
 
