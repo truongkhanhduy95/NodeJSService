@@ -1,7 +1,8 @@
 var User = require('../models/user');
 
 exports.userInfo = (req, res) => {
-    var id = req.query.userid;
+    var id = req.params.userId;
+    console.log(id);
     User.findById(id, function (err, user) {
         if (err)
             res.status(404).send(err.errors);

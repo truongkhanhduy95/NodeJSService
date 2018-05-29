@@ -1,15 +1,18 @@
 var express = require('express');
 var Status = require('../controllers/statusController');
+
+var User = require('../controllers/UserController');
 var Contact = require('../controllers/contactController')
-var Users = require('../controllers/UserController');
 
 var apiRoutes = express.Router();
   
 apiRoutes.route('/status').get(Status.list);
 apiRoutes.route('/status').post(Status.post);
-apiRoutes.route('/userinfo').get(Users.userInfo);
-apiRoutes.route('/listuser').get(Users.listUser);
-apiRoutes.route('/login').post(Users.authenticate);
+apiRoutes.route('/login').post(User.authenticate);
+apiRoutes.route('/statuses').get(Status.list);
+apiRoutes.route('/statuses').post(Status.post);
+apiRoutes.route('/users').get(User.listUser);
+apiRoutes.route('/users/:userId').get(User.userInfo);
 
 apiRoutes.route('/contact').get(Contact.list);
 module.exports = apiRoutes;

@@ -1,28 +1,19 @@
 var mongoose = require('mongoose');
 
 const StatusSchema = new mongoose.Schema({
-    owners:{
+    owner:{
         user_avatar:{
             type: String,
-            required: true,
-            trim: true
+            required: true
         },
         user_name:{
             type: String,
-            required: true,
-            trim: true
+            required: true
         },
         user_id:{
             type: String,
-            required: true,
-            unique: true,
-            trim: true
-        },
-    },
-    gender: {
-        type: String,
-        required: true,
-        trim: true
+            required: true
+        }
     },
     time_create: {
         type: String
@@ -45,5 +36,5 @@ const StatusSchema = new mongoose.Schema({
 });
 
 
-var Status = mongoose.model('status', StatusSchema);
+var Status = mongoose.model('statuses', StatusSchema);
 module.exports = Status;
