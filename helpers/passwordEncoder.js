@@ -1,24 +1,15 @@
-bcrypt = require('bcrypt');
+// bcrypt = require('bcrypt');
+var crypto = require('crypto');
 
-passwordEncoder => {
-    encodePassword = function(password, callback){
-        bcrypt.genSalt(10, function(err, salt) {
-            if (err) 
-              return callback(err);
-        
-            bcrypt.hash(password, salt, function(err, hash) {
-              return callback(err, hash);
-            });
-          });
-    }
+var salt = "Palomino";
+
+exports.encodePassword = function(password){
+    var mergePass = password + salt;
+    return crypto.createHash('md5').update(mergePass).digest('hex');
+}
     
-    comparePassword = function(plainPass, hashword, callback) {
-        bcrypt.compare(plainPass, hashword, function(err, isPasswordMatch) {   
-            return err == null ?
-                callback(null, isPasswordMatch) :
-                callback(err);
-        });
-    }
-}   
-
-module.exports = passwordEncoder
+exports.comparePassword = function(plainPass, hashword) {
+    var encodePass = plainPass + salt;
+    encodePass = crypto.createHash('md5').update(encodePass).digest('hex');
+    return encodePass == hashword;
+}
