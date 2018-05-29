@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user')
 
-
 mongoose.connect(config.database);
 var db = mongoose.connection;
 //handle mongo error
