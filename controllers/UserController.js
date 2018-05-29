@@ -25,7 +25,7 @@ exports.registerUser = (req, res) => {
     var user = new User();
     console.log(req.body.username);
     user.username = req.body.username;
-    user.password = req.body.password;
+    user.password = PasswordEncoder.encodePassword(req.body.password);
     user.fullname = req.body.fullname;
     user.phonenumber = req.body.phonenumber;
     user.email = req.body.email;
