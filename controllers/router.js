@@ -10,6 +10,7 @@ apiRoutes.route('/status').get(Status.list);
 apiRoutes.route('/status').post(Status.post);
 apiRoutes.route('/users').get(User.listUser);
 apiRoutes.route('/users/:userId').get(User.userInfo);
+apiRoutes.route('/users/').post(User.registerUser);
 
 apiRoutes.route('/contact').get(Contact.list);
 module.exports = apiRoutes;
