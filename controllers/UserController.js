@@ -1,4 +1,5 @@
 var User = require('../models/user');
+const PasswordEncoder = require('../helpers/passwordEncoder');
 
 exports.userInfo = (req, res) => {
     var id = req.params.userId;
@@ -24,7 +25,7 @@ exports.registerUser = (req, res) => {
     var user = new User();
     console.log(req.body.username);
     user.username = req.body.username;
-    user.password = req.body.password;
+    user.password = PasswordEncoder.encodePassword(req.body.password);
     user.fullname = req.body.fullname;
     user.phonenumber = req.body.phonenumber;
     user.email = req.body.email;
@@ -51,16 +52,11 @@ exports.authenticate = (req,res) => {
         if (!user) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
-    
           // check if password matches
-          if (user.password != req.body.password) {
-            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          if (PasswordEncoder.comparePassword(req.body.password, user.password)) {
+            res.json(user);
           } else {
-
-            res.json({
-              success: true,
-              message: 'login success'
-            });
+            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
           }
         }
     });
